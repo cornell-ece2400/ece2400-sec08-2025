@@ -93,7 +93,7 @@ int main( int argc, char** argv )
 
   // Calculate average elapsed time and peak heap usage
 
-  double elapsed_avg    = elapsed_total    / ntrials;
+  double elapsed_avg = elapsed_total / ntrials;
 
   printf( "Average: elapsed time = %f second\n", elapsed_avg );
 
@@ -101,8 +101,8 @@ int main( int argc, char** argv )
   // should be just be a list of ints increasing from 0 to size.
 
   int ref = 0;
-  for ( int v : lst ) {
-    if ( v != ref ) {
+  for ( size_t i = 0; i < size; i++ ) {
+    if ( lst.at(i) != ref ) {
       printf( "Error: List not reversed correctly!\n" );
       return 1;
     }

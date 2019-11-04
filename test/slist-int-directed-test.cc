@@ -21,11 +21,8 @@ void test_case_1_push_front()
   lst.push_front(10);
 
   int ref[] = { 10, 11, 12 };
-
-  size_t i = 0;
-  for ( int v : lst ) {
-    UTST_ASSERT_INT_EQ( v, ref[i] );
-    i += 1;
+  for ( size_t i = 0; i < 3; i++ ) {
+    UTST_ASSERT_INT_EQ( lst.at(i), ref[i] );
   }
 }
 
@@ -45,11 +42,8 @@ void test_case_2_reverse()
   lst.reverse();
 
   int ref[] = { 12, 11, 10 };
-
-  size_t i = 0;
-  for ( int v : lst ) {
-    UTST_ASSERT_INT_EQ( v, ref[i] );
-    i += 1;
+  for ( size_t i = 0; i < 3; i++ ) {
+    UTST_ASSERT_INT_EQ( lst.at(i), ref[i] );
   }
 }
 
@@ -78,21 +72,15 @@ void test_case_3_copy()
   // Verify list 0
 
   int ref0[] = { 12, 11, 10 };
-
-  size_t i = 0;
-  for ( int v : lst0 ) {
-    UTST_ASSERT_INT_EQ( v, ref0[i] );
-    i += 1;
+  for ( size_t i = 0; i < 3; i++ ) {
+    UTST_ASSERT_INT_EQ( lst0.at(i), ref0[i] );
   }
 
   // Verify list 1
 
   int ref1[] = { 10, 11, 12 };
-
-  size_t j = 0;
-  for ( int v : lst1 ) {
-    UTST_ASSERT_INT_EQ( v, ref1[j] );
-    j += 1;
+  for ( size_t i = 0; i < 3; i++ ) {
+    UTST_ASSERT_INT_EQ( lst1.at(i), ref1[i] );
   }
 }
 
@@ -125,21 +113,15 @@ void test_case_4_assign()
   // Verify list 0
 
   int ref0[] = { 12, 11, 10 };
-
-  size_t i = 0;
-  for ( int v : lst0 ) {
-    UTST_ASSERT_INT_EQ( v, ref0[i] );
-    i += 1;
+  for ( size_t i = 0; i < 3; i++ ) {
+    UTST_ASSERT_INT_EQ( lst0.at(i), ref0[i] );
   }
 
   // Verify list 1
 
   int ref1[] = { 10, 11, 12 };
-
-  size_t j = 0;
-  for ( int v : lst1 ) {
-    UTST_ASSERT_INT_EQ( v, ref1[j] );
-    j += 1;
+  for ( size_t i = 0; i < 3; i++ ) {
+    UTST_ASSERT_INT_EQ( lst1.at(i), ref1[i] );
   }
 }
 
@@ -154,7 +136,7 @@ int main( int argc, char** argv )
   if ( ( __n == 0 ) || ( __n == 1 ) ) test_case_1_push_front();
   if ( ( __n == 0 ) || ( __n == 2 ) ) test_case_2_reverse();
   if ( ( __n == 0 ) || ( __n == 3 ) ) test_case_3_copy();
-  if ( ( __n == 0 ) || ( __n == 3 ) ) test_case_4_assign();
+  if ( ( __n == 0 ) || ( __n == 4 ) ) test_case_4_assign();
 
   return 0;
 }

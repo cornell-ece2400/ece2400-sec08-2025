@@ -35,6 +35,7 @@ class SListInt
  public:
 
   void push_front( int v );
+  int  at( size_t idx );
   void reverse();
   void print() const;
 
@@ -55,51 +56,7 @@ class SListInt
 
   Node* m_head_p;            // member field
 
-  //----------------------------------------------------------------------
-  // Nested iterator class
-  //----------------------------------------------------------------------
-
- public:
-
-  class Itr
-  {
-   public:
-    Itr( Node* node_p );
-    void next();
-    int& get();
-    bool eq( Itr itr ) const;
-
-   private:
-    Node* m_node_p;
-  };
-
-  //----------------------------------------------------------------------
-  // Iterator begin/end member functions
-  //----------------------------------------------------------------------
-
- public:
-
-  const Itr begin() const;
-  const Itr end() const;
-
 };
-
-//------------------------------------------------------------------------
-// Overloaded operators for iterators
-//------------------------------------------------------------------------
-
-// Increment operator
-
-SListInt::Itr  operator++( SListInt::Itr& itr, int );
-SListInt::Itr& operator++( SListInt::Itr& itr );
-
-// Dereference operator
-
-int& operator*( SListInt::Itr& itr );
-
-// Not-equal operator
-
-bool operator!=( const SListInt::Itr& itr0, const SListInt::Itr& itr1  );
 
 //------------------------------------------------------------------------
 // Include inline definitions
