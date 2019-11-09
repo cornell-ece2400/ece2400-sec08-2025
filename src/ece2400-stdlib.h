@@ -1,70 +1,89 @@
 //========================================================================
 // ece2400-stdlib.h
 //========================================================================
-// Standard library for ece2400.
+// Utility functions and classes for PA4.
 //
-// DO NOT CHANGE THE FOLLOWING CODE!
-//
-// Author : Yanghui Ou
-//   Date : Sep 6, 2019
+// Author: Yanghui Ou
+//   Date: Oct 28, 2019
 
-#ifndef ECE2400_STDLIB
-#define ECE2400_STDLIB
+#ifndef ECE2400_STDLIB_H
+#define ECE2400_STDLIB_H
 
-//------------------------------------------------------------------------
-// ece2400_malloc
-//------------------------------------------------------------------------
-// Allocate memory of size mem_size Return a pointer to the newly
-// allocated memory or NULL if the allocation fails.
+#include <string>
 
-void* ece2400_malloc( size_t mem_size );
+namespace ece2400
+{
 
 //------------------------------------------------------------------------
-// ece2400_free
+// Exception
 //------------------------------------------------------------------------
-// Free the memory block associated with the pointer.
-//
-// NOTE:
-//
-// the memory block must be allocated using ece2400_malloc, otherwise it
-// is going to cause error.
+// Base class for exceptions.
 
-void ece2400_free( void* ptr );
+class Exception {};
 
 //------------------------------------------------------------------------
-// ece2400_mem_reset
+// OutOfRangeException
 //------------------------------------------------------------------------
-// Resets the memory counter to 0.
+// Exception for out of range access.
 
-void ece2400_mem_reset();
+class OutOfRange : Exception
+{
+ public:
+  OutOfRange();
+  OutOfRange( const char* err_msg );
 
-//------------------------------------------------------------------------
-// ece2400_mem_get_usage
-//------------------------------------------------------------------------
-// Return the amount of heap space that has been allocated so far in a
-// program.
+  std::string to_str() const;
 
-size_t ece2400_mem_get_usage();
-
-//------------------------------------------------------------------------
-// ece2400_mem_get_peak
-//------------------------------------------------------------------------
-// Return the peak heap usage.
-
-size_t ece2400_mem_get_peak();
+ private:
+  std::string m_err_msg;
+};
 
 //------------------------------------------------------------------------
-// ece2400_timer_reset
+// InvalidArgumentException
+//------------------------------------------------------------------------
+// Exception for out of range access.
+
+class InvalidArgument : Exception
+{
+public:
+  InvalidArgument();
+  InvalidArgument( const char* err_msg );
+
+  std::string to_str() const;
+
+private:
+  std::string m_err_msg;
+};
+
+#endif
+
+//------------------------------------------------------------------------
+// print_array
+//------------------------------------------------------------------------
+// Prints the contents in an integer array.
+
+void print_array( int* a, size_t size );
+
+//------------------------------------------------------------------------
+// sort
+//------------------------------------------------------------------------
+// Sorts an array of integer in ascending order using std::sort.
+
+void sort( int* a, size_t size );
+
+//------------------------------------------------------------------------
+// timer_reset
 //------------------------------------------------------------------------
 // Resets the timer.
 
-void ece2400_timer_reset();
+void timer_reset();
 
 //------------------------------------------------------------------------
-// ece2400_timer_get_elapsed
+// timer_get_elapsed
 //------------------------------------------------------------------------
-//  Return the elapased time in seconds.
+// Return the elapsed time in seconds.
 
-double ece2400_timer_get_elapsed();
+double timer_get_elapsed();
 
-#endif // ECE2400_STDLIB
+}
+

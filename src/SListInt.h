@@ -35,7 +35,7 @@ class SListInt
  public:
 
   void push_front( int v );
-  int  at( size_t idx );
+  int  at( size_t idx ) const;
   void reverse();
   void print() const;
 

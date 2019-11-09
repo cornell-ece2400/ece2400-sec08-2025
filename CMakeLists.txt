@@ -18,7 +18,7 @@ set(TEST_ALL_FILES
 )
 
 set(EVAL_FILES
-  slist-int-reverse-eval.cc
+  slist-int-eval.cc
 )
 
 #=========================================================================

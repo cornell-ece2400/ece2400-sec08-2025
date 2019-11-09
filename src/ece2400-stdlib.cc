@@ -1,122 +1,101 @@
 //========================================================================
-// ece2400-stdlib.c
+// ece2400-stdlib.cc
 //========================================================================
-// Utility functions to support memory and performance profiling.
-//
-// Note:
-//
-// DO NOT CHANGE THE FOLLOWING CODE!
+// Utility functions and classes for PA4.
 //
 // Author: Yanghui Ou
-//   Date: Sep 7, 2019
+//   Date: Oct 28, 2019
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <algorithm>
+#include <string>
 #include <sys/time.h>
 #include "ece2400-stdlib.h"
 
-#define MILLION 1000000.0;
+using namespace ece2400;
+
+const double million = 1000000.0;
 
 //------------------------------------------------------------------------
 // Global variables
 //------------------------------------------------------------------------
 
-size_t mem_usage  = 0;
-size_t peak_usage = 0;
-
 struct timeval start_time;
 struct timeval end_time;
 
 //------------------------------------------------------------------------
-// ece2400_malloc
+// OutOfRange
 //------------------------------------------------------------------------
-// Allocate memory of size mem_size. Return a pointer to the newly
-// allocated memory or NULL if the allocation fails.
 
-void* ece2400_malloc( size_t mem_size )
+OutOfRange::OutOfRange() { }
+
+OutOfRange::OutOfRange( const char* err_msg )
+  : m_err_msg( err_msg )
+{ }
+
+std::string OutOfRange::to_str() const
 {
-  void* ptr = malloc( mem_size  + sizeof(size_t) );
-
-  if ( ptr ){
-    // Update current usage
-    mem_usage += mem_size;
-
-    // Update peak usage
-    if ( mem_usage > peak_usage )
-      peak_usage = mem_usage;
-  }
-  else
-    return NULL;
-
-  ( (size_t*)ptr )[0] = mem_size;
-
-  return (void*)( ( (size_t*)ptr ) + 1 );
+  return m_err_msg;
 }
 
 //------------------------------------------------------------------------
-// ece2400_free
+// InvalidArgument
 //------------------------------------------------------------------------
-// Free the memory block that is allocated using ece2400_malloc. According
-// to C standard, if ptr is NULL, no action occurs.
 
-void ece2400_free( void* ptr )
+InvalidArgument::InvalidArgument() { }
+
+InvalidArgument::InvalidArgument( const char* err_msg )
+  : m_err_msg( err_msg )
+{ }
+
+std::string InvalidArgument::to_str() const
 {
-  if ( ptr ){
-    mem_usage -= ( (size_t*)ptr )[-1];
-    free( ( ( (size_t*)ptr ) - 1 ) );
-  }
+  return m_err_msg;
 }
 
 //------------------------------------------------------------------------
-// ece2400_mem_reset
+// print_array
 //------------------------------------------------------------------------
+// Prints the contents in an integer array.
 
-void ece2400_mem_reset()
+void ece2400::print_array( int* a, size_t size )
 {
-  mem_usage  = 0;
-  peak_usage = 0;
+  if ( size > 0 )
+    std::printf( "%d", a[0] );
+  for ( size_t i = 1; i < size; i++ )
+    std::printf( ", %d", a[i] );
+  std::printf( "\n" );
 }
 
 //------------------------------------------------------------------------
-// ece2400_mem_get_usage
+// sort
 //------------------------------------------------------------------------
-// Return the amount of heap space that has been allocated so far in a
-// program.
+// Sorts an array of integer in ascending order using std::sort.
 
-size_t ece2400_mem_get_usage()
+void ece2400::sort( int* a, size_t size )
 {
-  return mem_usage;
+  std::sort( a, a + size );
 }
 
 //------------------------------------------------------------------------
-// ece2400_mem_get_peak
-//------------------------------------------------------------------------
-// Return the peak heap usage.
-
-size_t ece2400_mem_get_peak()
-{
-  return peak_usage;
-}
-
-//------------------------------------------------------------------------
-// ece2400_timer_reset
+// timer_reset
 //------------------------------------------------------------------------
 // Resets the timer.
 
-void ece2400_timer_reset()
+void ece2400::timer_reset()
 {
   gettimeofday( &start_time, NULL );
 }
 
 //------------------------------------------------------------------------
-// ece2400_timer_get_elapsed
+// timer_get_elapsed
 //------------------------------------------------------------------------
-//  Return the elapased time in seconds.
+// Return the elapsed time in seconds.
 
-double ece2400_timer_get_elapsed()
+double ece2400::timer_get_elapsed()
 {
   gettimeofday( &end_time, NULL );
-  double elapsed_time = ( end_time.tv_sec  - start_time.tv_sec ) +
-                         ( end_time.tv_usec - start_time.tv_usec ) / MILLION;
+  double elapsed_time = ( end_time.tv_sec - start_time.tv_sec ) +
+                        ( end_time.tv_usec - start_time.tv_usec ) / million;
   return elapsed_time;
 }
+
