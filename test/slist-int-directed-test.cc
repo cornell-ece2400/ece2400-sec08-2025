@@ -153,9 +153,9 @@ void test_case_5_self_assign()
   }
 }
 
-//'''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
+//'''' LAB TASK ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 // Add more directed tests
-//''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+//''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 // Add at least one more test case for push_front and one more directed
 // test case for reverse.
 
