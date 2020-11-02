@@ -1,5 +1,5 @@
 //========================================================================
-// slist-int-eval.c
+// slist-int-eval.cc
 //========================================================================
 // This program evalutes the performance of SListInt::push_front and
 // SListInt::reverse by running multiple trials and averaging the elapsed
@@ -32,8 +32,7 @@ void print_help()
 
 int main( int argc, char** argv )
 {
-  int  size;
-  int* eval_arr;
+  size_t size;
 
   // Check command line arguments
 
@@ -47,7 +46,7 @@ int main( int argc, char** argv )
 
     // Check size
     if ( size < 1 || size > 50000 ) {
-      printf("Invalid size: %d\n\n", size );
+      printf("Invalid size: %lu\n\n", size );
       print_help();
       return 1;
     }
@@ -85,7 +84,7 @@ int main( int argc, char** argv )
   double elapsed;
   double elapsed_total = 0.0;
 
-  printf( "Fill and reverse with size %d\n", size );
+  printf( "Fill and reverse with size %lu\n", size );
 
   // Timing loop
 

@@ -3,8 +3,10 @@
 //========================================================================
 // This file contains directed tests for ListInt-related functions.
 
+#include <stdlib.h>
+
+#include "ece2400-stdlib.h"
 #include "SListInt.h"
-#include "utst.h"
 
 //------------------------------------------------------------------------
 // test_case_1_push_front
@@ -22,7 +24,7 @@ void test_case_1_push_front()
 
   int ref[] = { 10, 11, 12 };
   for ( size_t i = 0; i < 3; i++ ) {
-    UTST_ASSERT_INT_EQ( lst.at(i), ref[i] );
+    ECE2400_CHECK_INT_EQ( lst.at(i), ref[i] );
   }
 }
 
@@ -43,7 +45,7 @@ void test_case_2_reverse()
 
   int ref[] = { 12, 11, 10 };
   for ( size_t i = 0; i < 3; i++ ) {
-    UTST_ASSERT_INT_EQ( lst.at(i), ref[i] );
+    ECE2400_CHECK_INT_EQ( lst.at(i), ref[i] );
   }
 }
 
@@ -73,14 +75,14 @@ void test_case_3_copy()
 
   int ref0[] = { 12, 11, 10 };
   for ( size_t i = 0; i < 3; i++ ) {
-    UTST_ASSERT_INT_EQ( lst0.at(i), ref0[i] );
+    ECE2400_CHECK_INT_EQ( lst0.at(i), ref0[i] );
   }
 
   // Verify list 1
 
   int ref1[] = { 10, 11, 12 };
   for ( size_t i = 0; i < 3; i++ ) {
-    UTST_ASSERT_INT_EQ( lst1.at(i), ref1[i] );
+    ECE2400_CHECK_INT_EQ( lst1.at(i), ref1[i] );
   }
 }
 
@@ -114,16 +116,48 @@ void test_case_4_assign()
 
   int ref0[] = { 12, 11, 10 };
   for ( size_t i = 0; i < 3; i++ ) {
-    UTST_ASSERT_INT_EQ( lst0.at(i), ref0[i] );
+    ECE2400_CHECK_INT_EQ( lst0.at(i), ref0[i] );
   }
 
   // Verify list 1
 
   int ref1[] = { 10, 11, 12 };
   for ( size_t i = 0; i < 3; i++ ) {
-    UTST_ASSERT_INT_EQ( lst1.at(i), ref1[i] );
+    ECE2400_CHECK_INT_EQ( lst1.at(i), ref1[i] );
   }
 }
+
+//------------------------------------------------------------------------
+// test_case_5_self_assign
+//------------------------------------------------------------------------
+// A corner test case to check self assignment works.
+
+void test_case_5_self_assign()
+{
+  std::printf( "\n%s\n", __func__ );
+
+  SListInt lst;
+  lst.push_front(12);
+  lst.push_front(11);
+  lst.push_front(10);
+
+  // Call the assignment operator
+
+  lst = lst;
+
+  // Verify list
+
+  int ref[] = { 10, 11, 12 };
+  for ( size_t i = 0; i < 3; i++ ) {
+    ECE2400_CHECK_INT_EQ( lst.at(i), ref[i] );
+  }
+}
+
+//'''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
+// Add more directed tests
+//''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+// Add at least one more test case for push_front and one more directed
+// test case for reverse.
 
 //------------------------------------------------------------------------
 // main
@@ -131,12 +165,14 @@ void test_case_4_assign()
 
 int main( int argc, char** argv )
 {
-  __n = ( argc == 1 ) ? 0 : atoi( argv[1] );
+  __n = ( argc == 1 ) ? 0 : std::atoi( argv[1] );
 
-  if ( ( __n == 0 ) || ( __n == 1 ) ) test_case_1_push_front();
-  if ( ( __n == 0 ) || ( __n == 2 ) ) test_case_2_reverse();
-  if ( ( __n == 0 ) || ( __n == 3 ) ) test_case_3_copy();
-  if ( ( __n == 0 ) || ( __n == 4 ) ) test_case_4_assign();
+  if ( ( __n <= 0 ) || ( __n == 1 ) ) test_case_1_push_front();
+  if ( ( __n <= 0 ) || ( __n == 2 ) ) test_case_2_reverse();
+  if ( ( __n <= 0 ) || ( __n == 3 ) ) test_case_3_copy();
+  if ( ( __n <= 0 ) || ( __n == 4 ) ) test_case_4_assign();
+  if ( ( __n <= 0 ) || ( __n == 5 ) ) test_case_5_self_assign();
 
-  return 0;
+  printf( "\n" );
+  return __failed;
 }
