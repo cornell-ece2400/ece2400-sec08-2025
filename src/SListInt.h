@@ -35,7 +35,8 @@ class SListInt
   void push_front( int v );
   int  size() const;
   int* at( int idx );
-  void reverse();
+  void reverse_v1();
+  void reverse_v2();
   void print() const;
 
   //----------------------------------------------------------------------

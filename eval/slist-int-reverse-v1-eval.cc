@@ -1,5 +1,5 @@
 //========================================================================
-// slist-int-eval.cc
+// slist-int-reverse-v1-eval.cc
 //========================================================================
 // This program evalutes the performance of SListInt::push_front and
 // SListInt::reverse by running multiple trials and averaging the elapsed
@@ -19,8 +19,8 @@
 void print_help()
 {
   printf(
-    "usage: ./slist-int-eval <size>\n\n"
-    "Evaluation program for SListInt::push_front and SListInt::reverse\n\n"
+    "usage: ./slist-int-reverse-v1-eval <size>\n\n"
+    "Evaluation program for SListInt::push_front and SListInt::reverse_v1\n\n"
     "positional arguments:\n"
     "  size   Size of the input array. It has to be within (0, 50000].\n"
   );
@@ -61,7 +61,7 @@ int main( int argc, char** argv )
 
   // Reverse list
 
-  lst_verify.reverse();
+  lst_verify.reverse_v1();
 
   int ref = 0;
   for ( int i = 0; i < size; i++ ) {
@@ -106,7 +106,7 @@ int main( int argc, char** argv )
 
       // Reverse list
 
-      lst.reverse();
+      lst.reverse_v1();
     }
 
     // Stop tracking time

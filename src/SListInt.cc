@@ -15,6 +15,8 @@ SListInt::SListInt()
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement constructor
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+  m_head_p = nullptr;
 }
 
 //------------------------------------------------------------------------
@@ -26,6 +28,13 @@ SListInt::~SListInt()
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement destructor
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+  while ( m_head_p != nullptr ) {
+    Node* temp_p
+      = m_head_p->next_p;
+    delete m_head_p;
+    m_head_p = temp_p;
+  }
 }
 
 //------------------------------------------------------------------------
@@ -52,7 +61,7 @@ SListInt::SListInt( const SListInt& lst )
   // order, so we can call reverse to ensure that this list is an exact
   // copy of the given list.
 
-  reverse();
+  reverse_v1();
 }
 
 //------------------------------------------------------------------------
@@ -64,6 +73,9 @@ SListInt& SListInt::operator=( const SListInt& lst )
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Handle self-assignment correctly!
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+  if ( this == &lst )
+    return *this;
 
   // Delete all nodes in this list.
 
@@ -86,7 +98,7 @@ SListInt& SListInt::operator=( const SListInt& lst )
   // order, so we can call reverse to ensure that this list is an exact
   // copy of the given list.
 
-  reverse();
+  reverse_v1();
 
   return *this;
 }
@@ -100,6 +112,11 @@ void SListInt::push_front( int v )
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement push_front
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+  Node* new_node_p = new Node;
+  new_node_p->value  = v;
+  new_node_p->next_p = m_head_p;
+  m_head_p           = new_node_p;
 }
 
 //------------------------------------------------------------------------
@@ -111,7 +128,15 @@ int SListInt::size() const
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement size
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  return 0;
+
+  int   size   = 0;
+  Node* curr_p = m_head_p;
+  while ( curr_p != nullptr ) {
+    size++;
+    curr_p = curr_p->next_p;
+  }
+
+  return size;
 }
 
 //------------------------------------------------------------------------
@@ -123,18 +148,78 @@ int* SListInt::at( int idx )
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement at
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  return nullptr;
+
+  Node* curr_p = m_head_p;
+  for ( int i = 0; i < idx; i++ )
+    curr_p = curr_p->next_p;
+
+  return &curr_p->value;
 }
 
 //------------------------------------------------------------------------
-// SListInt::reverse
+// SListInt::reverse_v1
 //------------------------------------------------------------------------
 
-void SListInt::reverse()
+void SListInt::reverse_v1()
 {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  // Implement reverse
+  // Implement reverse_v1
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+  int n = size();
+
+  for ( int i = 0; i < n/2; i++ ) {
+    int lo = i;
+    int hi = (n-1) - i;
+
+    // swap lo and hi elements
+    int tmp = *at(lo);
+    *at(lo) = *at(hi);
+    *at(hi) = tmp;
+  }
+}
+
+//------------------------------------------------------------------------
+// SListInt::reverse_v2
+//------------------------------------------------------------------------
+
+void SListInt::reverse_v2()
+{
+  //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  // Implement reverse_v2
+  //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+  // 1. Get the number of items in list
+
+  int n = size();
+
+  // 2. Allocate a new array of integers on the heap with size items
+
+  int* tmp = new int[n];
+
+  // 3. Iterate through the list and copy each item to the array
+
+  int idx = 0;
+  Node* curr_p = m_head_p;
+  while ( curr_p != nullptr ) {
+    tmp[idx] = curr_p->value;
+    curr_p   = curr_p->next_p;
+    idx++;
+  }
+
+  // 4. Iterate through list and copy each item from array in reverse
+
+  idx    = 0;
+  curr_p = m_head_p;
+  while ( curr_p != nullptr ) {
+    curr_p->value = tmp[n-idx-1];
+    curr_p        = curr_p->next_p;
+    idx++;
+  }
+
+  // 5. Delete the temporary array
+
+  delete[] tmp;
 }
 
 //------------------------------------------------------------------------
@@ -150,3 +235,4 @@ void SListInt::print() const
   }
   printf("\n");
 }
+

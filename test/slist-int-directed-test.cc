@@ -31,11 +31,31 @@ void test_case_1_push_front()
 }
 
 //------------------------------------------------------------------------
-// test_case_2_reverse
+// test_case_2_push_front_longer
 //------------------------------------------------------------------------
-// A simple test case that tests reverse
+// A test case that tests push front with more data.
 
-void test_case_2_reverse()
+void test_case_2_push_front_longer()
+{
+  std::printf( "\n%s\n", __func__ );
+
+  SListInt lst;
+  for ( int i = 0; i < 12; i++ )
+    lst.push_front(i);
+
+  ECE2400_CHECK_INT_EQ( lst.size(), 12 );
+
+  for ( int i = 0; i < 12; i++ ) {
+    ECE2400_CHECK_INT_EQ( *lst.at(i), 12-i-1 );
+  }
+}
+
+//------------------------------------------------------------------------
+// test_case_3_reverse_v1
+//------------------------------------------------------------------------
+// A simple test case that tests reverse v1
+
+void test_case_3_reverse_v1()
 {
   std::printf( "\n%s\n", __func__ );
 
@@ -43,7 +63,7 @@ void test_case_2_reverse()
   lst.push_front(12);
   lst.push_front(11);
   lst.push_front(10);
-  lst.reverse();
+  lst.reverse_v1();
 
   ECE2400_CHECK_INT_EQ( lst.size(), 3 );
 
@@ -54,11 +74,54 @@ void test_case_2_reverse()
 }
 
 //------------------------------------------------------------------------
-// test_case_3_copy
+// test_case_4_reverse_longer_v1
+//------------------------------------------------------------------------
+// A test case that tests reverse v1 with more data.
+
+void test_case_4_reverse_longer_v1()
+{
+  std::printf( "\n%s\n", __func__ );
+
+  SListInt lst;
+  for ( int i = 0; i < 12; i++ )
+    lst.push_front(i);
+  lst.reverse_v1();
+
+  ECE2400_CHECK_INT_EQ( lst.size(), 12 );
+
+  for ( int i = 0; i < 12; i++ ) {
+    ECE2400_CHECK_INT_EQ( *lst.at(i), i );
+  }
+}
+
+//------------------------------------------------------------------------
+// test_case_5_reverse_reverse_v1
+//------------------------------------------------------------------------
+// A test case that calls reverse twice
+
+void test_case_5_reverse_reverse_v1()
+{
+  std::printf( "\n%s\n", __func__ );
+
+  SListInt lst;
+  for ( int i = 0; i < 12; i++ )
+    lst.push_front(i);
+  lst.reverse_v1();
+  lst.reverse_v1();
+
+  ECE2400_CHECK_INT_EQ( lst.size(), 12 );
+
+  for ( int i = 0; i < 12; i++ ) {
+    ECE2400_CHECK_INT_EQ( *lst.at(i), 12-i-1 );
+  }
+}
+
+//------------------------------------------------------------------------
+// test_case_6_copy
 //------------------------------------------------------------------------
 // A simple test case that tests copying lists
 
-void test_case_3_copy()
+void test_case_6_copy()
 {
   std::printf( "\n%s\n", __func__ );
 
@@ -75,7 +138,7 @@ void test_case_3_copy()
 
   // Reverse list 0 to make sure it does not change list 1
 
-  lst0.reverse();
+  lst0.reverse_v1();
 
   // Verify list 0
 
@@ -97,11 +160,11 @@ void test_case_3_copy()
 }
 
 //------------------------------------------------------------------------
-// test_case_4_assign
+// test_case_7_assign
 //------------------------------------------------------------------------
 // A simple test case that tests assigning lists
 
-void test_case_4_assign()
+void test_case_7_assign()
 {
   std::printf( "\n%s\n", __func__ );
 
@@ -122,7 +185,7 @@ void test_case_4_assign()
 
   // Reverse list 0 to make sure it does not change list 1
 
-  lst0.reverse();
+  lst0.reverse_v1();
 
   // Verify list 0
 
@@ -144,11 +207,11 @@ void test_case_4_assign()
 }
 
 //------------------------------------------------------------------------
-// test_case_5_self_assign
+// test_case_8_self_assign
 //------------------------------------------------------------------------
 // A corner test case to check self assignment works.
 
-void test_case_5_self_assign()
+void test_case_8_self_assign()
 {
   std::printf( "\n%s\n", __func__ );
 
@@ -173,11 +236,71 @@ void test_case_5_self_assign()
   }
 }
 
-//'''' LAB TASK ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-// Add more directed tests
-//''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-// Add at least one more test case for push_front and one more directed
-// test case for reverse.
+//------------------------------------------------------------------------
+// test_case_9_reverse_v2
+//------------------------------------------------------------------------
+// A simple test case that tests reverse v2
+
+void test_case_9_reverse_v2()
+{
+  std::printf( "\n%s\n", __func__ );
+
+  SListInt lst;
+  lst.push_front(12);
+  lst.push_front(11);
+  lst.push_front(10);
+  lst.reverse_v2();
+
+  ECE2400_CHECK_INT_EQ( lst.size(), 3 );
+
+  int ref[] = { 12, 11, 10 };
+  for ( int i = 0; i < 3; i++ ) {
+    ECE2400_CHECK_INT_EQ( *lst.at(i), ref[i] );
+  }
+}
+
+//------------------------------------------------------------------------
+// test_case_10_reverse_longer_v2
+//------------------------------------------------------------------------
+// A test case that tests reverse v2 with more data.
+
+void test_case_10_reverse_longer_v2()
+{
+  std::printf( "\n%s\n", __func__ );
+
+  SListInt lst;
+  for ( int i = 0; i < 12; i++ )
+    lst.push_front(i);
+  lst.reverse_v2();
+
+  ECE2400_CHECK_INT_EQ( lst.size(), 12 );
+
+  for ( int i = 0; i < 12; i++ ) {
+    ECE2400_CHECK_INT_EQ( *lst.at(i), i );
+  }
+}
+
+//------------------------------------------------------------------------
+// test_case_11_reverse_reverse_v2
+//------------------------------------------------------------------------
+// A test case that calls reverse twice
+
+void test_case_11_reverse_reverse_v2()
+{
+  std::printf( "\n%s\n", __func__ );
+
+  SListInt lst;
+  for ( int i = 0; i < 12; i++ )
+    lst.push_front(i);
+  lst.reverse_v2();
+  lst.reverse_v2();
+
+  ECE2400_CHECK_INT_EQ( lst.size(), 12 );
+
+  for ( int i = 0; i < 12; i++ ) {
+    ECE2400_CHECK_INT_EQ( *lst.at(i), 12-i-1 );
+  }
+}
 
 //------------------------------------------------------------------------
 // main
@@ -187,11 +310,17 @@ int main( int argc, char** argv )
 {
   __n = ( argc == 1 ) ? 0 : std::atoi( argv[1] );
 
-  if ( ( __n <= 0 ) || ( __n == 1 ) ) test_case_1_push_front();
-  if ( ( __n <= 0 ) || ( __n == 2 ) ) test_case_2_reverse();
-  if ( ( __n <= 0 ) || ( __n == 3 ) ) test_case_3_copy();
-  if ( ( __n <= 0 ) || ( __n == 4 ) ) test_case_4_assign();
-  if ( ( __n <= 0 ) || ( __n == 5 ) ) test_case_5_self_assign();
+  if ( ( __n <= 0 ) || ( __n == 1  ) ) test_case_1_push_front();
+  if ( ( __n <= 0 ) || ( __n == 2  ) ) test_case_2_push_front_longer();
+  if ( ( __n <= 0 ) || ( __n == 3  ) ) test_case_3_reverse_v1();
+  if ( ( __n <= 0 ) || ( __n == 4  ) ) test_case_4_reverse_longer_v1();
+  if ( ( __n <= 0 ) || ( __n == 5  ) ) test_case_5_reverse_reverse_v1();
+  if ( ( __n <= 0 ) || ( __n == 6  ) ) test_case_6_copy();
+  if ( ( __n <= 0 ) || ( __n == 7  ) ) test_case_7_assign();
+  if ( ( __n <= 0 ) || ( __n == 8  ) ) test_case_8_self_assign();
+  if ( ( __n <= 0 ) || ( __n == 9  ) ) test_case_9_reverse_v2();
+  if ( ( __n <= 0 ) || ( __n == 10 ) ) test_case_10_reverse_longer_v2();
+  if ( ( __n <= 0 ) || ( __n == 11 ) ) test_case_11_reverse_reverse_v2();
 
   printf( "\n" );
   return __failed;
