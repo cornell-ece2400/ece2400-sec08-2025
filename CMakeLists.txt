@@ -40,7 +40,7 @@ endfunction()
 # Set up environment
 #-------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8...3.19)
 enable_language(C)
 enable_testing()
 project(sec8)

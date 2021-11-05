@@ -32,7 +32,7 @@ void print_help()
 
 int main( int argc, char** argv )
 {
-  size_t size;
+  int size;
 
   // Check command line arguments
 
@@ -46,7 +46,7 @@ int main( int argc, char** argv )
 
     // Check size
     if ( size < 1 || size > 50000 ) {
-      printf("Invalid size: %lu\n\n", size );
+      printf("Invalid size: %d\n\n", size );
       print_help();
       return 1;
     }
@@ -56,7 +56,7 @@ int main( int argc, char** argv )
   // actual experiment.
 
   SListInt lst_verify;
-  for ( size_t i = 0; i < size; i++ )
+  for ( int i = 0; i < size; i++ )
     lst_verify.push_front( i );
 
   // Reverse list
@@ -64,8 +64,8 @@ int main( int argc, char** argv )
   lst_verify.reverse();
 
   int ref = 0;
-  for ( size_t i = 0; i < size; i++ ) {
-    if ( !(lst_verify.at(i) == ref) ) {
+  for ( int i = 0; i < size; i++ ) {
+    if ( !(*lst_verify.at(i) == ref) ) {
       printf( "Error: List not reversed correctly!\n" );
       return 1;
     }
@@ -84,7 +84,7 @@ int main( int argc, char** argv )
   double elapsed;
   double elapsed_total = 0.0;
 
-  printf( "Fill and reverse with size %lu\n", size );
+  printf( "Fill and reverse with size %d\n", size );
 
   // Timing loop
 
@@ -101,7 +101,7 @@ int main( int argc, char** argv )
       // Fill list with decreasing values
 
       SListInt lst;
-      for ( size_t i = 0; i < size; i++ )
+      for ( int i = 0; i < size; i++ )
         lst.push_front( i );
 
       // Reverse list
