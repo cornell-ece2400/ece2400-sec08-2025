@@ -15,8 +15,6 @@ SListInt::SListInt()
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement constructor
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  m_head_p = nullptr;
 }
 
 //------------------------------------------------------------------------
@@ -28,13 +26,6 @@ SListInt::~SListInt()
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement destructor
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  while ( m_head_p != nullptr ) {
-    Node* temp_p
-      = m_head_p->next_p;
-    delete m_head_p;
-    m_head_p = temp_p;
-  }
 }
 
 //------------------------------------------------------------------------
@@ -74,9 +65,6 @@ SListInt& SListInt::operator=( const SListInt& lst )
   // Handle self-assignment correctly!
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  if ( this == &lst )
-    return *this;
-
   // Delete all nodes in this list.
 
   while ( m_head_p != nullptr ) {
@@ -112,11 +100,6 @@ void SListInt::push_front( int v )
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement push_front
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  Node* new_node_p = new Node;
-  new_node_p->value  = v;
-  new_node_p->next_p = m_head_p;
-  m_head_p           = new_node_p;
 }
 
 //------------------------------------------------------------------------
@@ -128,15 +111,7 @@ int SListInt::size() const
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement size
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  int   size   = 0;
-  Node* curr_p = m_head_p;
-  while ( curr_p != nullptr ) {
-    size++;
-    curr_p = curr_p->next_p;
-  }
-
-  return size;
+  return 0;
 }
 
 //------------------------------------------------------------------------
@@ -148,12 +123,7 @@ int* SListInt::at( int idx )
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement at
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  Node* curr_p = m_head_p;
-  for ( int i = 0; i < idx; i++ )
-    curr_p = curr_p->next_p;
-
-  return &curr_p->value;
+  return nullptr;
 }
 
 //------------------------------------------------------------------------
@@ -165,18 +135,6 @@ void SListInt::reverse()
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement reverse
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  int n = size();
-
-  for ( int i = 0; i < n/2; i++ ) {
-    int lo = i;
-    int hi = (n-1) - i;
-
-    // swap lo and hi elements
-    int tmp = *at(lo);
-    *at(lo) = *at(hi);
-    *at(hi) = tmp;
-  }
 }
 
 //------------------------------------------------------------------------

@@ -180,31 +180,6 @@ void test_case_5_self_assign()
 // test case for reverse.
 
 //------------------------------------------------------------------------
-// test_case_2_reverse
-//------------------------------------------------------------------------
-// A simple test case that tests reverse
-
-void test_case_7_reverse()
-{
-  std::printf( "\n%s\n", __func__ );
-
-  SListInt lst;
-  lst.push_front(12);
-  lst.push_front(11);
-  lst.push_front(10);
-  lst.push_front(9);
-  lst.push_front(8);
-  lst.push_front(7);
-  lst.push_front(6);
-  lst.reverse();
-
-  int ref[] = { 12, 11, 10, 9, 8, 7, 6 };
-  for ( int i = 0; i < 7; i++ ) {
-    ECE2400_CHECK_INT_EQ( *lst.at(i), ref[i] );
-  }
-}
-
-//------------------------------------------------------------------------
 // main
 //------------------------------------------------------------------------
 
@@ -217,7 +192,6 @@ int main( int argc, char** argv )
   if ( ( __n <= 0 ) || ( __n == 3 ) ) test_case_3_copy();
   if ( ( __n <= 0 ) || ( __n == 4 ) ) test_case_4_assign();
   if ( ( __n <= 0 ) || ( __n == 5 ) ) test_case_5_self_assign();
-  if ( ( __n <= 0 ) || ( __n == 7 ) ) test_case_7_reverse();
 
   printf( "\n" );
   return __failed;
