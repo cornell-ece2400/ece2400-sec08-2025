@@ -23,7 +23,11 @@ SListInt::~SListInt()
 {
   while ( m_head_p != nullptr ) {
     Node* temp_p = m_head_p->next_p;
-    delete m_head_p;
+
+    //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    // Delete the node
+    //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
     m_head_p = temp_p;
   }
 }
@@ -97,10 +101,9 @@ SListInt& SListInt::operator=( const SListInt& lst )
 
 void SListInt::push_front( int v )
 {
-  Node* new_node_p = new Node;
-  new_node_p->value  = v;
-  new_node_p->next_p = m_head_p;
-  m_head_p           = new_node_p;
+  //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  // Implement push_front
+  //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 }
 
 //------------------------------------------------------------------------
