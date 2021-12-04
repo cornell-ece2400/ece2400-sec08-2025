@@ -1,8 +1,7 @@
 #=========================================================================
-# slist-int-reverse-v1-v2-ploy.py
+# slist-plot-all.py
 #=========================================================================
-# Simple python script for plotting measured execution time and doing a
-# polynomial fit using matplotlib and numpy.
+# Simple python script for plotting all of the results on a single plot.
 #
 # Author : Christopher Batten
 # Date   : October 14, 2021
@@ -59,14 +58,16 @@ with open("slist-int-reverse-v2-eval.txt") as f:
 
 fig, ax = plt.subplots()
 
-# Use a scatter plot for the measured experimental results
+# Plot the data
 
-ax.plot( v1_n, v1_t, marker='*' )
-ax.plot( v2_n, v2_t, marker='o' )
+ax.plot( v1_n, v1_t, marker='o', label="SListInt::reverse_v1" )
+ax.plot( v2_n, v2_t, marker='^', label="SListInt::reverse_v2" )
 
 # Add some labels, grid, an save to a PDF
 
 ax.set( xlabel="Input Array Size", ylabel="Measured Execution Time (s)" )
 ax.grid()
-fig.savefig( "slist-int-reverse-v1-v2-plot.pdf", bbox_inches='tight' )
+ax.legend()
+
+fig.savefig( "slist-plot-all.pdf", bbox_inches='tight' )
 
