@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
 ROOT=$(basename $(pwd))
 
@@ -16,7 +16,11 @@ if make test; then
     echo "Tests passed"
     echo "Recording execution time..."
 
-    ./build/eval/selection-sort-int-eval $@ | tee -a results.txt
+    echo "Evaluating reverse-v1..." >> results.txt
+    ./build/eval/slist-int-reverse-v1-eval $@ 2>&1 | tee -a results.txt
+    echo "===========================" >> results.txt
+    echo "Evaluating reverse-v2..." >> results.txt
+    ./build/eval/slist-int-reverse-v2-eval $@ 2>&1 | tee -a results.txt
 
 else
     echo "Tests failed"
