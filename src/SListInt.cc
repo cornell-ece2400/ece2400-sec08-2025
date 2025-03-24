@@ -4,14 +4,14 @@
 // Implementation for SListInt
 
 #include "SListInt.h"
+
 #include <cstdio>
 
 //------------------------------------------------------------------------
 // SListInt Default Constructor
 //------------------------------------------------------------------------
 
-SListInt::SListInt()
-{
+SListInt::SListInt() {
   m_head_p = nullptr;
 }
 
@@ -19,9 +19,8 @@ SListInt::SListInt()
 // SListInt Destructor
 //------------------------------------------------------------------------
 
-SListInt::~SListInt()
-{
-  while ( m_head_p != nullptr ) {
+SListInt::~SListInt() {
+  while (m_head_p != nullptr) {
     Node* temp_p = m_head_p->next_p;
 
     //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -38,8 +37,7 @@ SListInt::~SListInt()
 // SListInt Copy Constructor
 //------------------------------------------------------------------------
 
-SListInt::SListInt( const SListInt& lst )
-{
+SListInt::SListInt(const SListInt& lst) {
   // We must make sure head pointer is initialized correctly, otherwise
   // push_front will not work correctly.
 
@@ -49,8 +47,8 @@ SListInt::SListInt( const SListInt& lst )
   // add it to this list.
 
   Node* curr_p = lst.m_head_p;
-  while ( curr_p != nullptr ) {
-    push_front( curr_p->value );
+  while (curr_p != nullptr) {
+    push_front(curr_p->value);
     curr_p = curr_p->next_p;
   }
 
@@ -65,8 +63,7 @@ SListInt::SListInt( const SListInt& lst )
 // SListInt Swap
 //------------------------------------------------------------------------
 
-void SListInt::swap( SListInt& lst )
-{
+void SListInt::swap(SListInt& lst) {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement swap
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -80,23 +77,21 @@ void SListInt::swap( SListInt& lst )
 // SListInt Overloaded Assignment Operator
 //------------------------------------------------------------------------
 
-SListInt& SListInt::operator=( const SListInt& lst )
-{
+SListInt& SListInt::operator=(const SListInt& lst) {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement operator=
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  SListInt tmp( lst ); // create temporary copy of given list
-  swap( tmp );         // swap this list with temporary list
-  return *this;        // destructor called for temporary list
+  SListInt tmp(lst);  // create temporary copy of given list
+  swap(tmp);          // swap this list with temporary list
+  return *this;       // destructor called for temporary list
 }
 
 //------------------------------------------------------------------------
 // SListInt::push_front
 //------------------------------------------------------------------------
 
-void SListInt::push_front( int v )
-{
+void SListInt::push_front(int v) {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement push_front
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -111,12 +106,11 @@ void SListInt::push_front( int v )
 // SListInt::size
 //------------------------------------------------------------------------
 
-int SListInt::size() const
-{
+int SListInt::size() const {
   int n = 0;
 
   Node* curr_p = m_head_p;
-  while ( curr_p != nullptr ) {
+  while (curr_p != nullptr) {
     n++;
     curr_p = curr_p->next_p;
   }
@@ -128,14 +122,13 @@ int SListInt::size() const
 // SListInt::at
 //------------------------------------------------------------------------
 
-int SListInt::at( int idx ) const
-{
+int SListInt::at(int idx) const {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement at
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
   Node* curr_p = m_head_p;
-  for ( int i = 0; i < idx; i++ )
+  for (int i = 0; i < idx; i++)
     curr_p = curr_p->next_p;
 
   return curr_p->value;
@@ -145,14 +138,13 @@ int SListInt::at( int idx ) const
 // SListInt::at
 //------------------------------------------------------------------------
 
-int& SListInt::at( int idx )
-{
+int& SListInt::at(int idx) {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement at
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
   Node* curr_p = m_head_p;
-  for ( int i = 0; i < idx; i++ )
+  for (int i = 0; i < idx; i++)
     curr_p = curr_p->next_p;
 
   return curr_p->value;
@@ -170,16 +162,15 @@ int& SListInt::at( int idx )
 //      swap( x[lo], x[hi] )
 //
 
-void SListInt::reverse_v1()
-{
+void SListInt::reverse_v1() {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement reverse_v1
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
   int n = size();
-  for ( int i = 0; i < n/2; i++ ) {
+  for (int i = 0; i < n / 2; i++) {
     int lo = i;
-    int hi = (n-1)-i;
+    int hi = (n - 1) - i;
 
     int tmp = at(lo);
     at(lo)  = at(hi);
@@ -197,8 +188,7 @@ void SListInt::reverse_v1()
 //  3. Swap this list with the temporary list
 //
 
-void SListInt::reverse_v2()
-{
+void SListInt::reverse_v2() {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement reverse_v2
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -208,26 +198,24 @@ void SListInt::reverse_v2()
 
   // Step 2. Push front all values from this list onto temporary list
   Node* curr_p = m_head_p;
-  while ( curr_p != nullptr ) {
-    lst.push_front( curr_p->value );
+  while (curr_p != nullptr) {
+    lst.push_front(curr_p->value);
     curr_p = curr_p->next_p;
   }
 
   // Step 3. Swap this list with temporary list
-  swap( lst );
+  swap(lst);
 }
 
 //------------------------------------------------------------------------
 // SListInt::print
 //------------------------------------------------------------------------
 
-void SListInt::print() const
-{
+void SListInt::print() const {
   Node* curr_p = m_head_p;
-  while ( curr_p != nullptr ) {
-    std::printf( "%d ", curr_p->value );
+  while (curr_p != nullptr) {
+    std::printf("%d ", curr_p->value);
     curr_p = curr_p->next_p;
   }
-  std::printf( "\n" );
+  std::printf("\n");
 }
-
