@@ -5,6 +5,7 @@
 
 #include "SListInt.h"
 
+#include <cassert>
 #include <cstdio>
 
 //------------------------------------------------------------------------
@@ -26,10 +27,7 @@ SListInt::~SListInt() {
     //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''
     // Delete the node
     //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-    delete m_head_p;
-
-    m_head_p = temp_p;
+    assert(false && "Replace this with destructor code");
   }
 }
 
@@ -67,10 +65,7 @@ void SListInt::swap(SListInt& lst) {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement swap
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  Node* tmp_p  = m_head_p;
-  m_head_p     = lst.m_head_p;
-  lst.m_head_p = tmp_p;
+  assert(false && "Replace this with your swap code");
 }
 
 //------------------------------------------------------------------------
@@ -78,10 +73,6 @@ void SListInt::swap(SListInt& lst) {
 //------------------------------------------------------------------------
 
 SListInt& SListInt::operator=(const SListInt& lst) {
-  //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  // Implement operator=
-  //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
   SListInt tmp(lst);  // create temporary copy of given list
   swap(tmp);          // swap this list with temporary list
   return *this;       // destructor called for temporary list
@@ -95,11 +86,7 @@ void SListInt::push_front(int v) {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement push_front
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  Node* new_node_p   = new Node;
-  new_node_p->value  = v;
-  new_node_p->next_p = m_head_p;
-  m_head_p           = new_node_p;
+  assert(false && "Replace this with your push_front code");
 }
 
 //------------------------------------------------------------------------
@@ -127,11 +114,7 @@ int SListInt::at(int idx) const {
   // Implement at
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  Node* curr_p = m_head_p;
-  for (int i = 0; i < idx; i++)
-    curr_p = curr_p->next_p;
-
-  return curr_p->value;
+  assert(false && "Replace this with your at code");
 }
 
 //------------------------------------------------------------------------
@@ -142,12 +125,7 @@ int& SListInt::at(int idx) {
   //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Implement at
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-  Node* curr_p = m_head_p;
-  for (int i = 0; i < idx; i++)
-    curr_p = curr_p->next_p;
-
-  return curr_p->value;
+  assert(false && "Replace this with your at code");
 }
 
 //------------------------------------------------------------------------
@@ -167,15 +145,7 @@ void SListInt::reverse_v1() {
   // Implement reverse_v1
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  int n = size();
-  for (int i = 0; i < n / 2; i++) {
-    int lo = i;
-    int hi = (n - 1) - i;
-
-    int tmp = at(lo);
-    at(lo)  = at(hi);
-    at(hi)  = tmp;
-  }
+  assert(false && "Replace this with your reverse_v1 code");
 }
 
 //------------------------------------------------------------------------
@@ -189,10 +159,6 @@ void SListInt::reverse_v1() {
 //
 
 void SListInt::reverse_v2() {
-  //''' LAB TASK '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  // Implement reverse_v2
-  //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
   // Step 1. Create temporary list
   SListInt lst;
 
